@@ -109,18 +109,18 @@
           "legend": { "format": ".1s" }
         },
         "tooltip": [
-          { "field": "Entity", "type": "nominal" },
+          { "field": "Entity", "type": "nominal", "title": "Country" },
           { "field": "Population", "type": "quantitative", "format": ",.0f" },
           {
             "field": "Per capita consumption-based CO2 emissions",
             "type": "quantitative",
-            "title": "CO2 emissions per capita",
+            "title": "CO2 emissions per capita (T)",
             "format": ".0f"
           },
           {
             "field": "GDP per capita",
             "type": "quantitative",
-            "format": ",.0f"
+            "format": "$,.0f"
           }
         ]
       }
@@ -145,18 +145,18 @@
           "value": 0
         },
         "tooltip": [
-          { "field": "Entity", "type": "nominal" },
+          { "field": "Entity", "type": "nominal", "title": "Country" },
           { "field": "Population", "type": "quantitative", "format": ",.0f" },
           {
             "field": "Per capita consumption-based CO2 emissions",
             "type": "quantitative",
-            "title": "CO2 emissions per capita",
-            "format": ".0f"
+            "title": "CO2 emissions per capita (T)",
+            "format": ".0d"
           },
           {
             "field": "GDP per capita",
             "type": "quantitative",
-            "format": ",.0f"
+            "format": "$,.0f"
           }
         ]
       }
