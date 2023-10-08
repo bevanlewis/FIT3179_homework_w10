@@ -1,4 +1,4 @@
-Entity,Code,Year,Per capita consumption-based CO2 emissions,"GDP per capita, PPP (constant 2017 international $)",Population (historical estimates),Continent
+Entity,Code,Year,Per capita consumption-based CO2 emissions,GDP per capita,Population,Continent
 Abkhazia,OWID_ABK,2015,,,,Asia
 Afghanistan,AFG,2002,,1280.4631,21000258,
 Afghanistan,AFG,2003,,1292.3335,22645136,
