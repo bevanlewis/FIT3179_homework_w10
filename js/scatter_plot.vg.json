@@ -1,0 +1,165 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "title": "Consumption-based CO₂ emissions per capita vs. GDP per capita, 1990-2020",
+  "data": {
+    "url": "https://raw.githubusercontent.com/bevanlewis/FIT3179_homework_w10/main/data/consumption-co2-per-capita-vs-gdppc.csv"
+  },
+  "transform": [
+    { "filter": "datum['GDP per capita'] > 0" },
+    { "filter": "datum['Per capita consumption-based CO2 emissions'] > 0" },
+    { "filter": "datum.Year == Year" },
+    {
+      "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+    }
+  ],
+  "params": [
+    {
+      "name": "Year",
+      "value": 2020,
+      "bind": {
+        "input": "range",
+        "min": 1990,
+        "max": 2020,
+        "step": 1,
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "labels": [
+          "Show All",
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "GDP per capita",
+      "type": "quantitative",
+      "title": "GDP per capita (USD)",
+      "axis": { "tickCount": 3 },
+      "scale": {
+        "type": "log",
+        "domain": [450, 120000]
+      }
+    },
+    "y": {
+      "field": "Per capita consumption-based CO2 emissions",
+      "title": "CO2 emissions per capita (tons)",
+      "type": "quantitative",
+      "axis": { "tickCount": 5 },
+      "scale": { "type": "log", "domain": [0.03, 50] }
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "North America",
+              "South America",
+              "Europe",
+              "Africa",
+              "Asia",
+              "Oceania"
+            ],
+            "range": [
+              "#e41a1c",
+              "#984ea3",
+              "#ff7f00",
+              "#a6cee3",
+              "#377eb8",
+              "#a65628"
+            ]
+          }
+        },
+        "opacity": { "value": 0.6 },
+        "size": {
+          "field": "Population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+            "range": [10, 50, 150, 200, 300, 400]
+          },
+          "legend": { "format": ".1s" }
+        },
+        "tooltip": [
+          { "field": "Entity", "type": "nominal" },
+          { "field": "Population", "type": "quantitative", "format": ",.0f" },
+          {
+            "field": "Per capita consumption-based CO2 emissions",
+            "type": "quantitative",
+            "title": "CO2 emissions per capita",
+            "format": ".0f"
+          },
+          {
+            "field": "GDP per capita",
+            "type": "quantitative",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": { "field": "Entity", "type": "nominal" },
+        "color": { "value": "black" },
+        "opacity": {
+          "condition": {
+            "test": "datum['Entity'] =='Kenya' || datum['Entity'] =='China' || datum['Entity'] =='Singapore' || datum['Entity'] =='Australia' || datum['Entity'] =='Mexico' || datum['Entity'] =='New Zealand' || datum['Entity'] =='India' ||  datum['Entity'] =='United Arab Emirates'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          { "field": "Entity", "type": "nominal" },
+          { "field": "Population", "type": "quantitative", "format": ",.0f" },
+          {
+            "field": "Per capita consumption-based CO2 emissions",
+            "type": "quantitative",
+            "title": "CO2 emissions per capita",
+            "format": ".0f"
+          },
+          {
+            "field": "GDP per capita",
+            "type": "quantitative",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ]
+}
